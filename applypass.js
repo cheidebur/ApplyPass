@@ -33,15 +33,16 @@ const applyButtonsListArraySearch = Array.from(applyButtonsList2);
 
 //attach interval function to button and check if the array has anything.
 //if it does, we determine which page we're on and delegate to the correct functions
+
 goButton.addEventListener("click", function() {
 
     if (applyButtonsListArraySug.length > 0) {
         console.log("Applying for jobs on the Suggestions page.");
-        intervalButton(applyButtonsListArraySug, suggestionsIterator, 1500);
+        intervalButton(applyButtonsListArraySug, suggestionsIteratee, 1500);
 
     } else if (applyButtonsListArraySearch.length > 0){
         console.log("Applying for jobs on the Search page.");
-        intervalButton(applyButtonsListArraySearch, searchIterator, 1100);
+        intervalButton(applyButtonsListArraySearch, searchIteratee, 1500);
     }
 })
 
@@ -60,21 +61,26 @@ function intervalButton(nodes, iterateFunction, delay) {
     let current = 0;
     console.log("Starting the application interval. Close the tab to terminate.");
 
-    setInterval(() => {
+    let iterateInterval = setInterval(() => {
       if (current === nodes.length) {
-        clearInterval()
+        clearInterval(iterateInterval);
       } else {
-        iterateFunction(nodes[current])
+        console.log("current at start of function is ", current);
+
+        console.log("passing node to iterate function: ", nodes[current]);
+        iterateFunction(nodes[current]);
         current++
+
+        console.log("current at end of function is ", current);
       }
     }, delay)
 }
 
-function suggestionsIterator(currentNode) {
+function suggestionsIteratee(currentNode) {
     console.log("Stopping page redirect");
     window.stop();
     console.log("APPLYING TO JOB", currentNode);
-    currentNode.click();
+    // currentNode.click();
 
     //suggestions page nodes have an ID so it's pretty easy to grab it and
     //target the node with it for the click();
@@ -84,13 +90,20 @@ function suggestionsIterator(currentNode) {
     console.log(" 💋 application sent! 💋");
 }
 
-function searchIterator(currentNode) {
-    console.log("Stopping page redirect");
-    window.stop();
-    console.log("APPLYING TO JOB", currentNode);
-    currentNode.click();
+//k the issue is that the function cannot complete
+//idk why but it might be because of the delay.
+//i think the function needs to complete so that it can
+//increment the let in the iterator function, because
+//the issue is that it does not increment. annoying.
+
+function searchIteratee(currentNode) {
+    //console.log("Stopping page redirect");
+    //window.stop();
+    //console.log("APPLYING TO JOB", currentNode);
+    //currentNode.click();
 
     //no ID here, grab by data-href property
+    console.log("current node is ", currentNode);
     let thisNodeId = currentNode.querySelectorAll["data-href"][0];
     console.log("selected node ID is ", thisNodeId);
     //let thisNode = document.getElementByI(thisNodeId);
