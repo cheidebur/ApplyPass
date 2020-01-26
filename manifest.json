@@ -1,0 +1,20 @@
+{
+
+    "manifest_version": 2,
+    "name": "ApplyPass",
+    "version": "1.0",
+  
+    "description": "Automating job applications on popular job sites",
+  
+    "icons": {
+      "48": "applypass48.png"
+    },
+  
+    "content_scripts": [
+      {
+        "matches": ["*://*.ziprecruiter.com/*"],
+        "js": ["applypass.js"]
+      }
+    ]
+  
+  }
