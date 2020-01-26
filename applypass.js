@@ -42,7 +42,7 @@ goButton.addEventListener("click", function() {
 
     } else if (applyButtonsListArraySearch.length > 0){
         console.log("Applying for jobs on the Search page.");
-        intervalButton(applyButtonsListArraySearch, searchIteratee, 1500);
+        intervalButton(applyButtonsListArraySearch, searchIteratee, 1150);
     }
 })
 
@@ -97,16 +97,14 @@ function suggestionsIteratee(currentNode) {
 //we didn't spend 6k on a bootcamp for nothing, dumbass
 
 function searchIteratee(currentNode) {
-    //console.log("Stopping page redirect");
-    //window.stop();
-    //console.log("APPLYING TO JOB", currentNode);
-    //currentNode.click();
+
+    console.log("Stopping page redirect");
+    window.stop();
 
     //no ID here, grab by data-href property
     console.log("current node is ", currentNode);
-    //let thisNodeId = currentNode.querySelectorAll["data-href"][0];
-    //console.log("selected node ID is ", thisNodeId);
-    //let thisNode = document.getElementByI(thisNodeId);
-    //thisNode.click();
+
+    console.log("APPLYING TO JOB", currentNode);
+    currentNode.click();
     console.log(" 💋 application sent! 💋");
 }
