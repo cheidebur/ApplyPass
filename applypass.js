@@ -24,18 +24,17 @@ appendCtrl.appendChild(goButton);
 docBody.appendChild(appendCtrl);
 
 
-
-//determine which page we're on based on the 1-click apply
-//class name, which is different on the suggestions/search page.
-
+//the .quickApplyButton class is from the suggestion page - creating a classic
+// JS array from the iteratable DOM object that querySelectorAll creates
 const applyButtonsList = document.querySelectorAll(".quickApplyButton");
 const applyButtonsListArraySug = Array.from(applyButtonsList);
-
+//same here but with .one_click_apply which is for the job search page
 const applyButtonsList2 = document.querySelectorAll(".one_click_apply");
 const applyButtonsListArraySearch = Array.from(applyButtonsList2);
 
 
-//attach interval function to button
+//attach interval function to button and check if the array has anything.
+//if it does, we determine which page we're on and delegate to the correct functions
 goButton.addEventListener("click", function() {
 
     if (applyButtonsListArraySug.length > 0) {
@@ -56,8 +55,6 @@ if (applyButtonsListArraySug.length > 0) {
 } else {
     console.log("You're on the search page.");
 }
-
-
 
 //intervalButton takes nodes, a function to act upon those nodes,
 //and a set delay. It calls the iterate function, which in this case
