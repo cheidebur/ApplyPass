@@ -1,6 +1,5 @@
 console.log("Welcome to ApplyPass");
 
-
 //this code generates the apply button and its styles,
 //and then appends it to the top left of the page.
 //ZipRecruiter is sassy with their z-indexes so we make them sassier
@@ -23,7 +22,6 @@ goButton.innerText = "Apply to jobs on this page";
 appendCtrl.appendChild(goButton);
 docBody.appendChild(appendCtrl);
 
-
 //the .quickApplyButton class is from the suggestion page - creating a classic
 // JS array from the iteratable DOM object that querySelectorAll creates
 const applyButtonsList = document.querySelectorAll(".quickApplyButton");
@@ -32,29 +30,22 @@ const applyButtonsListArraySug = Array.from(applyButtonsList);
 const applyButtonsList2 = document.querySelectorAll(".one_click_apply");
 const applyButtonsListArraySearch = Array.from(applyButtonsList2);
 
-
 //attach interval function to button and check if the array has anything.
 //if it does, we determine which page we're on and delegate to the correct functions
 goButton.addEventListener("click", function() {
 
     if (applyButtonsListArraySug.length > 0) {
         console.log("Applying for jobs on the Suggestions page.");
-        intervalButton(applyButtonsListArraySug, buttonAction, 1500);
+        intervalButton(applyButtonsListArraySug, suggestionsIterator, 1500);
 
     } else if (applyButtonsListArraySearch.length > 0){
         console.log("Applying for jobs on the Search page.");
-        intervalButton(applyButtonsListArraySearch, buttonAction, 1100);
+        intervalButton(applyButtonsListArraySearch, searchIterator, 1100);
     }
 })
 
 console.log("suggestions apply nodes are ", applyButtonsListArraySug);
 console.log("job search apply nodes are ", applyButtonsListArraySearch);
-
-if (applyButtonsListArraySug.length > 0) {
-    console.log("You're on the suggestions page");
-} else {
-    console.log("You're on the search page.");
-}
 
 //intervalButton takes nodes, a function to act upon those nodes,
 //and a set delay. It calls the iterate function, which in this case
@@ -78,11 +69,22 @@ function intervalButton(nodes, iterateFunction, delay) {
     }, delay)
 }
 
-function buttonAction(currentNode) {
-
+function suggestionsIterator(currentNode) {
     console.log("Stopping page redirect");
     window.stop();
+    console.log("APPLYING TO JOB", currentNode);
+    //click is for search page, thisNode is for suggestions page
+    currentNode.click();
 
+    let thisNodeId = currentNode.id;
+    let thisNode = document.getElementById(thisNodeId);
+    thisNode.click();
+    console.log(" 💋 application sent! 💋");
+}
+
+function searchIterator(currentNode) {
+    console.log("Stopping page redirect");
+    window.stop();
     console.log("APPLYING TO JOB", currentNode);
     //click is for search page, thisNode is for suggestions page
     currentNode.click();
