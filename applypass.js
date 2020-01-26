@@ -90,11 +90,11 @@ function suggestionsIteratee(currentNode) {
     console.log(" 💋 application sent! 💋");
 }
 
-//k the issue is that the function cannot complete
-//idk why but it might be because of the delay.
-//i think the function needs to complete so that it can
-//increment the let in the iterator function, because
-//the issue is that it does not increment. annoying.
+//the function below will not run all the way
+//if null variables are passed, and the current variable
+// will not get a chance to increment, breaking the program
+//make sure the DOM element exists and is targeted correctly.
+//we didn't spend 6k on a bootcamp for nothing, dumbass
 
 function searchIteratee(currentNode) {
     //console.log("Stopping page redirect");
@@ -104,8 +104,8 @@ function searchIteratee(currentNode) {
 
     //no ID here, grab by data-href property
     console.log("current node is ", currentNode);
-    let thisNodeId = currentNode.querySelectorAll["data-href"][0];
-    console.log("selected node ID is ", thisNodeId);
+    //let thisNodeId = currentNode.querySelectorAll["data-href"][0];
+    //console.log("selected node ID is ", thisNodeId);
     //let thisNode = document.getElementByI(thisNodeId);
     //thisNode.click();
     console.log(" 💋 application sent! 💋");
