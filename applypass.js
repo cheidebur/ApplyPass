@@ -2,7 +2,7 @@ console.log("Welcome to ApplyPass");
 
 //this code generates the apply button and its styles,
 //and then appends it to the top left of the page.
-//ZipRecruiter is sassy with their z-indexes so we make them sassier
+//ZipRecruiter is sassy with their z-indexes (1k) so we make them sassier (1k+)
 //to stick on top.
 
 const docBody = document.getElementsByTagName("html")[0];
@@ -26,6 +26,7 @@ docBody.appendChild(appendCtrl);
 // JS array from the iteratable DOM object that querySelectorAll creates
 const applyButtonsList = document.querySelectorAll(".quickApplyButton");
 const applyButtonsListArraySug = Array.from(applyButtonsList);
+
 //same here but with .one_click_apply which is for the job search page
 const applyButtonsList2 = document.querySelectorAll(".one_click_apply");
 const applyButtonsListArraySearch = Array.from(applyButtonsList2);
@@ -73,9 +74,10 @@ function suggestionsIterator(currentNode) {
     console.log("Stopping page redirect");
     window.stop();
     console.log("APPLYING TO JOB", currentNode);
-    //click is for search page, thisNode is for suggestions page
     currentNode.click();
 
+    //suggestions page nodes have an ID so it's pretty easy to grab it and
+    //target the node with it for the click();
     let thisNodeId = currentNode.id;
     let thisNode = document.getElementById(thisNodeId);
     thisNode.click();
@@ -86,11 +88,12 @@ function searchIterator(currentNode) {
     console.log("Stopping page redirect");
     window.stop();
     console.log("APPLYING TO JOB", currentNode);
-    //click is for search page, thisNode is for suggestions page
     currentNode.click();
 
-    let thisNodeId = currentNode.id;
-    let thisNode = document.getElementById(thisNodeId);
-    thisNode.click();
+    //no ID here, grab by data-href property
+    let thisNodeId = currentNode.querySelectorAll["data-href"][0];
+    console.log("selected node ID is ", thisNodeId);
+    //let thisNode = document.getElementByI(thisNodeId);
+    //thisNode.click();
     console.log(" 💋 application sent! 💋");
 }
