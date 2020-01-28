@@ -42,9 +42,44 @@ goButton.addEventListener("click", function() {
 
     } else if (applyButtonsListArraySearch.length > 0){
         console.log("Applying for jobs on the Search page.");
-        intervalButton(applyButtonsListArraySearch, searchIteratee, 1150);
+        //intervalButton(applyButtonsListArraySearch, searchIteratee, 850);
+
+        //when we pass a number as an argument that is not defined
+        //as a variable previously, how is the variable initiated? let, var, etc?
+        //how does that work
+        questionCheck(applyButtonsListArraySearch, 0);
     }
 })
+
+function questionCheck(nodes, i) {
+    console.log("questionCheck index is at ", i, " at beginning of func.");
+
+    let nodeToCheck = nodes[i];
+    console.log("checking this job node for interview questions...", nodeToCheck);
+    nodeToCheck.click();
+
+    setTimeout(() => {
+        let thisNodeClassList = nodeToCheck.classList;
+        console.log("classList for this node is ", thisNodeClassList);
+
+        if (nodeToCheck.classList.contains("interview")) {
+            console.log("This job requires extra quesions. Stopping redirect");
+            window.stop();
+            i++
+            console.log("recursion check - running again with nodes ", nodes);
+            questionCheck(nodes, i);
+        } else {
+            console.log("this job does not require extra questions, applied and moving on");
+            i++
+            console.log("questionCheck index is at ", i, " at end of func.");
+            questionCheck(nodes, i);
+        }
+    }, 1500)
+}
+//
+//interview button classes are job_tool job_apply interview
+//check if button has this text, if so, stop the window before it redirects
+//and move on to the next 
 
 console.log("suggestions apply nodes are ", applyButtonsListArraySug);
 console.log("job search apply nodes are ", applyButtonsListArraySearch);
@@ -66,14 +101,12 @@ function intervalButton(nodes, iterateFunction, delay) {
         clearInterval(iterateInterval);
       } else {
         console.log("current at start of function is ", current);
-
         console.log("passing node to iterate function: ", nodes[current]);
         iterateFunction(nodes[current]);
         current++
-
         console.log("current at end of function is ", current);
       }
-    }, delay)
+    }, delay + 500)
 }
 
 function suggestionsIteratee(currentNode) {
@@ -90,21 +123,14 @@ function suggestionsIteratee(currentNode) {
     console.log(" 💋 application sent! 💋");
 }
 
-//the function below will not run all the way
-//if null variables are passed, and the current variable
-// will not get a chance to increment, breaking the program
-//make sure the DOM element exists and is targeted correctly.
-//we didn't spend 6k on a bootcamp for nothing, dumbass
-
 function searchIteratee(currentNode) {
-
     console.log("Stopping page redirect");
     window.stop();
-
-    //no ID here, grab by data-href property
-    console.log("current node is ", currentNode);
 
     console.log("APPLYING TO JOB", currentNode);
     currentNode.click();
     console.log(" 💋 application sent! 💋");
+    
 }
+
+
