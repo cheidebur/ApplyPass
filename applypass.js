@@ -1,10 +1,5 @@
 console.log("Welcome to ApplyPass");
 
-//this code generates the apply button and its styles,
-//and then appends it to the top left of the page.
-//ZipRecruiter is sassy with their z-indexes (1k) so we make them sassier (1k+)
-//to stick on top.
-
 const docBody = document.getElementsByTagName("html")[0];
 const appendCtrl = document.createElement("div");
 appendCtrl.style.width = "5em"
@@ -42,11 +37,6 @@ goButton.addEventListener("click", function() {
 
     } else if (applyButtonsListArraySearch.length > 0){
         console.log("Applying for jobs on the Search page.");
-        //intervalButton(applyButtonsListArraySearch, searchIteratee, 850);
-
-        //when we pass a number as an argument that is not defined
-        //as a variable previously, how is the variable initiated? let, var, etc?
-        //how does that work
         questionCheck(applyButtonsListArraySearch, 0);
     }
 })
@@ -79,7 +69,7 @@ function questionCheck(nodes, i) {
             console.log("questionCheck index is at ", i, " at end of func.");
             questionCheck(nodes, i);
         }
-    }, 1500)
+    }, 1100)
 }
 //
 //interview button classes are job_tool job_apply interview
@@ -91,10 +81,10 @@ console.log("job search apply nodes are ", applyButtonsListArraySearch);
 
 //intervalButton takes nodes, a function to act upon those nodes,
 //and a set delay. It calls the iterate function, which in this case
-//is buttonAction, on each node in the collection after the delay, which
+//is intervalButton, on each node in the collection after the delay, which
 //we have set at 1500. 1.5 seconds is enough time for the request to go
 //through before the redirect is cancelled with window.stop(), which is
-//called at the beginning of buttonAction,
+//called at the beginning of intervalButton,
 //the argument we pass to the iterateFunction parameter.
 
 function intervalButton(nodes, iterateFunction, delay) {
@@ -111,31 +101,18 @@ function intervalButton(nodes, iterateFunction, delay) {
         current++
         console.log("current at end of function is ", current);
       }
-    }, delay + 500)
+    }, delay)
 }
 
 function suggestionsIteratee(currentNode) {
+
     console.log("Stopping page redirect");
     window.stop();
     console.log("APPLYING TO JOB", currentNode);
-    // currentNode.click();
 
-    //suggestions page nodes have an ID so it's pretty easy to grab it and
-    //target the node with it for the click();
-    let thisNodeId = currentNode.id;
     let thisNode = document.getElementById(thisNodeId);
     thisNode.click();
     console.log(" 💋 application sent! 💋");
-}
-
-function searchIteratee(currentNode) {
-    console.log("Stopping page redirect");
-    window.stop();
-
-    console.log("APPLYING TO JOB", currentNode);
-    currentNode.click();
-    console.log(" 💋 application sent! 💋");
-    
 }
 
 
