@@ -62,6 +62,10 @@ function questionCheck(nodes, i) {
         let thisNodeClassList = nodeToCheck.classList;
         console.log("classList for this node is ", thisNodeClassList);
 
+        //the if blocks here speak to the original goal, which was to
+        //detect whether there were questions and stop the redirect if so.
+        //that didn't seem to work for whatever reason, and window.stop()ing
+        //the query either way seems to work, so I'm leaving it here for now
         if (nodeToCheck.classList.contains("interview")) {
             console.log("This job requires extra quesions. Stopping redirect");
             window.stop();
@@ -70,6 +74,7 @@ function questionCheck(nodes, i) {
             questionCheck(nodes, i);
         } else {
             console.log("this job does not require extra questions, applied and moving on");
+            window.stop();
             i++
             console.log("questionCheck index is at ", i, " at end of func.");
             questionCheck(nodes, i);
